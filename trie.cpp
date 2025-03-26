@@ -1,7 +1,7 @@
 #include "data_structure.h"
 
 
-void Trie::insert(std::string word) {
+void Trie::insert(string word) {
   Trie *node = this;
   for (char ch : word) {
     ch -= 'a';
@@ -12,7 +12,7 @@ void Trie::insert(std::string word) {
   node->is_end = true;
 }
 
-bool Trie::search(std::string word) {
+bool Trie::search(string word) {
   Trie *node = this;
   for (char ch : word) {
     ch -= 'a';
@@ -23,7 +23,7 @@ bool Trie::search(std::string word) {
   return node->is_end;
 }
 
-bool Trie::startsWith(std::string prefix) {
+bool Trie::startsWith(string prefix) {
   Trie *node = this;
   for (char ch : prefix) {
     ch -= 'a';

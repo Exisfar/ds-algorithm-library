@@ -1,8 +1,3 @@
-# Sorting
-
-## Qucik Sort
-
-```cpp
 int partition(int *a, int left, int right) {
   int pivot = a[left];
   while (left != right) {
@@ -24,17 +19,3 @@ void quickSort(int *a, int left, int right) {
   quickSort(a, left, pivot_pos - 1);
   quickSort(a, pivot_pos + 1, right);
 }
-
-int main() {
-  int a[5] = {5, 4, 3, 2, 1};
-  int n = sizeof(a) / sizeof(int);
-  // cout << n << "\n";
-  quickSort(a, 0, n - 1);
-
-  for (int i = 0; i < n; i++) {
-    cout << a[i] << " ";
-  }
-  cout << "\n";
-  return 0;
-}
-```
