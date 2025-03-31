@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
+#include <stack>
+#include <queue>
 #include <unordered_set>
 #include <unordered_map>
 
 using namespace std;
-
 
 class ListNode {
 public:
@@ -21,25 +22,27 @@ public:
   // Palindrome Linked List
 };
 
-class TreeNode {
+class BinTreeNode {
 public:
   int val;
-  TreeNode *left;
-  TreeNode *right;
-  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  BinTreeNode *left;
+  BinTreeNode *right;
+  BinTreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 
-  static void preorder(TreeNode *root);
-  static void inorder(TreeNode *root);
-  static void postorder(TreeNode *root);
-  static void levelorder(TreeNode *root);
-  static int maxDepth(TreeNode *root);
-  static int minDepth(TreeNode *root);
-  static bool isSymmetric(TreeNode *root);
-  static bool isBalanced(TreeNode *root);
-  static TreeNode *sortedArrayToBST(vector<int> &nums);
-  static TreeNode *sortedListToBST(ListNode *head);
-  static TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p,
-                                        TreeNode *q);
+  static vector<int> preorder(BinTreeNode *root);
+  static vector<int> inorder(BinTreeNode *root);
+  static vector<int> postorder(BinTreeNode *root);
+  static vector<vector<int>> levelorder(BinTreeNode *root);
+  static int maxDepth(BinTreeNode *root);
+  static int minDepth(BinTreeNode *root);
+  static BinTreeNode *invertTree(BinTreeNode *root);
+  static bool isSymmetric(BinTreeNode *root);
+  static int diameterOfBinaryTree(BinTreeNode *root);
+  static bool isBalanced(BinTreeNode *root);
+  static BinTreeNode *sortedArrayToBST(vector<int> &nums);
+  static BinTreeNode *sortedListToBST(ListNode *head);
+  static BinTreeNode *lowestCommonAncestor(BinTreeNode *root, BinTreeNode *p,
+                                           BinTreeNode *q);
 };
 
 class Graph {

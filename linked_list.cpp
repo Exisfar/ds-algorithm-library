@@ -3,17 +3,17 @@
 /* 下面这种注释叫做Doxygen注释 */
 
 /**
-  * @brief Detects if a linked list has a cycle.
-  *
-  * @details Usually use the Floyd's Cycle Detection Algorithm (Fast and Slow
-  * Pointers)
-  *
-  * @param head Pointer to the head of the linked list.
-  * @return true if there is a cycle, false otherwise.
-  *
-  * @note Time complexity: O(n)
-  * @note Space complexity: O(1)
-  */
+ * @brief Detects if a linked list has a cycle.
+ *
+ * @details Usually use the Floyd's Cycle Detection Algorithm (Fast and Slow
+ * Pointers)
+ *
+ * @param head Pointer to the head of the linked list.
+ * @return true if there is a cycle, false otherwise.
+ *
+ * @note Time complexity: O(n)
+ * @note Space complexity: O(1)
+ */
 bool ListNode::hasCycle(ListNode *head) {
   if (!head || !head->next) {
     return false; // No cycle if the list is empty or has only one node
