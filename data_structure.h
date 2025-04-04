@@ -29,6 +29,10 @@ public:
   BinTreeNode *right;
   BinTreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 
+  bool search(int x);
+  bool insert(int x);
+  bool remove(int x);
+
   static vector<int> preorder(BinTreeNode *root);
   static vector<int> inorder(BinTreeNode *root);
   static vector<int> postorder(BinTreeNode *root);
@@ -38,8 +42,8 @@ public:
   static BinTreeNode *invertTree(BinTreeNode *root);
   static bool isSymmetric(BinTreeNode *root);
   static int diameterOfBinaryTree(BinTreeNode *root);
-  static bool isBalanced(BinTreeNode *root);
   static BinTreeNode *sortedArrayToBST(vector<int> &nums);
+  static bool isBalanced(BinTreeNode *root);
   static BinTreeNode *sortedListToBST(ListNode *head);
   static BinTreeNode *lowestCommonAncestor(BinTreeNode *root, BinTreeNode *p,
                                            BinTreeNode *q);
@@ -94,4 +98,12 @@ public:
   static int longestPalindrome(string s);
   // 5.Longest palindromic Substring (DP)
   static string longestPalindromicSubstring(string s);
+};
+
+class Array {
+public:
+  vector<int> nums;
+
+  static int firstMissingPositive(vector<int> &nums);
+  static int findRepeatNumber(vector<int> &nums);
 };

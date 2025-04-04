@@ -1,6 +1,104 @@
 #include "data_structure.h"
 #include <stack>
 
+bool BinTreeNode::search(int x) {
+  BinTreeNode *node = this;
+  while (node != nullptr) {
+    if (x < node->val)
+      node = node->left;
+    else if (x > node->val)
+      node = node->right;
+    else
+      return true;
+  }
+  return false;
+}
+
+bool BinTreeNode::insert(int x) {
+  BinTreeNode *node = this;
+
+  while (node != nullptr) {
+    if (x < node->val) {
+      if (node->left == nullptr) {
+        node->left = new BinTreeNode(x);
+        return node->left;
+      } else {
+        node = node->left;
+      }
+    } else if (x > node->val) {
+      if (node->right == nullptr) {
+        node->right = new BinTreeNode(x);
+        return node->right;
+      } else {
+        node = node->right;
+      }
+    } else {
+      return false; // Duplicate value
+    }
+  }
+
+  this->val = x;
+  return true;
+}
+
+bool BinTreeNode::remove(int x) {
+  BinTreeNode *node = this;
+  BinTreeNode *parent = nullptr;
+
+  while (node != nullptr) {
+    if (x < node->val) {
+      parent = node;
+      node = node->left;
+    } else if (x > node->val) {
+      parent = node;
+      node = node->right;
+    } else {
+      // case1: no child
+      if (node->left == nullptr && node->right == nullptr) {
+        delete node;
+        return true;
+      }
+      // case2: one child
+      else if (node->left == nullptr || node->right == nullptr) {
+        BinTreeNode *child = (node->left != nullptr) ? node->left : node->right;
+        if (parent == nullptr) {
+          this->val = child->val;
+          this->left = child->left;
+          this->right = child->right;
+        } else if (parent->left == node) {
+          parent->left = child;
+        } else {
+          parent->right = child;
+        }
+        delete node;
+        return true;
+        // case3: two children
+      } else {
+        BinTreeNode *successor = node->right;
+        BinTreeNode *successorParent = node;
+
+        // Inorder successor of the right subtree
+        // It must be the leftmost node
+        while (successor->left != nullptr) {
+          successorParent = successor;
+          successor = successor->left;
+        }
+
+        node->val = successor->val;
+        if (successorParent->left == successor) {
+          successorParent->left = successor->right;
+        } else {
+          successorParent->right = successor->right;
+        }
+        delete successor;
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+
 vector<int> BinTreeNode::preorder(BinTreeNode *root) {
   vector<int> res;
   stack<BinTreeNode *> st;
@@ -226,4 +324,35 @@ int BinTreeNode::diameterOfBinaryTree(BinTreeNode *root) {
   // Record the maximum diameter during the recursion
   maxDepthForDiameter(root);
   return max_diameter;
+}
+
+/** sortedArrayToBST
+ * @brief: Convert a sorted array to a height-balanced binary search tree.
+ * @param nums: The sorted array.
+ * @return: The root of the height-balanced binary search tree.
+ * @note: A height-balanced binary search tree is defined as a binary tree in
+ *        which the depth of the two subtrees of every node never differs by
+ *        more than one.
+ * Time Complexity: O(n).
+ * Space Complexity: O(n). The space complexity is determined by the recursion
+ * stack.
+ */
+BinTreeNode *BinTreeNode::sortedArrayToBST(vector<int> &nums) {
+  if (nums.empty())
+    return nullptr;
+  stack<tuple<int, int, BinTreeNode **>> st;
+  BinTreeNode *root = nullptr;
+  st.push({0, nums.size() - 1, &root});
+
+  while (!st.empty()) {
+    auto [left, right, parent] = st.top();
+    st.pop();
+    if (left > right)
+      continue;
+    int mid = left + (right - left) / 2;
+    *parent = new BinTreeNode(nums[mid]);
+    st.push({left, mid - 1, &((*parent)->left)});
+    st.push({mid + 1, right, &((*parent)->right)});
+  }
+  return root;
 }
