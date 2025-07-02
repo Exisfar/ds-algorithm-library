@@ -4,8 +4,9 @@ using namespace std;
 
 // Given an array nums of distinct integers, return all the possible
 // permutations. You can return the answer in any order.
-void permuteHelper(vector<int> &nums, vector<int> &cur, vector<bool> &visited,
-                   vector<vector<int>> &res, int n, int depth) {
+static void permuteHelper(vector<int> &nums, vector<int> &cur,
+                          vector<bool> &visited, vector<vector<int>> &res,
+                          int n, int depth) {
   if (depth == n) {
     res.push_back(cur);
   }
@@ -21,7 +22,7 @@ void permuteHelper(vector<int> &nums, vector<int> &cur, vector<bool> &visited,
   }
 }
 
-vector<vector<int>> permute(vector<int> &nums) {
+vector<vector<int>> Backtrack::permute(vector<int> &nums) {
   int n = nums.size();
   vector<vector<int>> res;
   vector<int> cur;
@@ -30,8 +31,8 @@ vector<vector<int>> permute(vector<int> &nums) {
   return res;
 }
 
-void permuteHelper2(vector<vector<int>> &res, vector<int> &output, int first,
-                    int len) {
+static void permuteHelper2(vector<vector<int>> &res, vector<int> &output,
+                           int first, int len) {
   // 所有数都填完了
   if (first == len) {
     res.emplace_back(output);
@@ -46,7 +47,8 @@ void permuteHelper2(vector<vector<int>> &res, vector<int> &output, int first,
     swap(output[i], output[first]);
   }
 }
-vector<vector<int>> permute2(vector<int> &nums) {
+
+vector<vector<int>> Backtrack::permute2(vector<int> &nums) {
   vector<vector<int>> res;
   permuteHelper2(res, nums, 0, (int)nums.size());
   return res;
@@ -57,7 +59,7 @@ vector<vector<int>> permute2(vector<int> &nums) {
 // The solution set must not contain duplicate subsets. Return the
 // solution in any order.
 // Solution: 每个数字都有两种状态，选或者不选，可以用mask或者递归
-vector<vector<int>> Subsets(vector<int> &nums) {
+vector<vector<int>> Backtrack::Subsets(vector<int> &nums) {
   vector<int> t;
   vector<vector<int>> res;
   int n = nums.size();
@@ -75,9 +77,11 @@ vector<vector<int>> Subsets(vector<int> &nums) {
   return res;
 }
 
+
+
 int main() {
   vector<int> nums = {1, 2, 3};
-  vector<vector<int>> res = permute(nums);
+  vector<vector<int>> res = Backtrack::permute(nums);
   for (auto &v : res) {
     for (auto &i : v) {
       cout << i << " ";
