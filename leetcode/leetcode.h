@@ -1,12 +1,4 @@
-#include <iostream>
-
-#include <vector>
-#include <stack>
-#include <queue>
-#include <unordered_set>
-#include <unordered_map>
-#include <cstring>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 

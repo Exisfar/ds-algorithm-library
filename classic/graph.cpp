@@ -128,8 +128,9 @@ void Graph::dijkstra(vector<vector<int>> edges, int n, int s) {
     if (dis_x > dis[x])
       continue;
 
-    for (auto & [y, d] : g[x]) {
-      int dis_y = dis_x + d; // update shortest path to x's neighbors.
+    for (auto &[y, d] : g[x]) {
+      // relax x's neighbors
+      int dis_y = dis_x + d;
       if (dis_y < dis[y]) {
         dis[y] = dis_y;
         pq.emplace(dis_y, y);
